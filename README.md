@@ -41,4 +41,11 @@ git commit -am "Added nubis-wrapper submodule"
 git push origin master
 ```
 
-
+If you want to update the git submodule you will need to do the followign:
+```bashe
+cd $PROJECTDIR/bin
+git pull origin master
+cd ..
+git commit -am "Updated git submodule"
+git push origin master
+```
