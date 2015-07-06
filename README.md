@@ -6,12 +6,14 @@ I got tired of typing out the cloudformation commands so i wrote scripts to help
 
 You will need to configure the BASE_DIR variable by editing the variables.sh file
 
-| Scripts         | Description |
-|-----------------|-------------|
-|build.sh         | Builds the cloudformation stack and requires a stackname as a command line parameter |
-|update.sh        | Updates the cloudformation stack, also requires a stackname. |
-|delete.sh        | Deletes the stack, this also deletes any data that is in consul |
-|packer-build.sh  | Builds ami using nubis-builder|
+| Scripts           | Description |
+|-------------------|-------------|
+|build.sh           | Builds the cloudformation stack and requires a stackname as a command line parameter |
+|update.sh          | Updates the cloudformation stack, also requires a stackname. |
+|delete.sh          | Deletes the stack, this also deletes any data that is in consul |
+|packer-build.sh    | Builds ami using nubis-builder|
+|ssh.sh             | SSH to ec2 instance, smart enough to know user but not smart enough to know region|
+|status.sh          | Outputs stack building status|
 
 ### Usage
 All scripts need to be ran from the base directory of your project instead of the bin directory
@@ -41,8 +43,8 @@ git commit -am "Added nubis-wrapper submodule"
 git push origin master
 ```
 
-If you want to update the git submodule you will need to do the followign:
-```bashe
+If you want to update the git submodule you will need to do the following:
+```bash
 cd $PROJECTDIR/bin
 git pull origin master
 cd ..
