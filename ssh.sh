@@ -31,7 +31,16 @@ else
     exit 1
 fi
 
-INSTANCE_IP=$(nubis-consul --stack-name ${STACK_NAME} --settings ${PROJECT_DIR}/nubis/cloudformation/parameters.json get-ec2-instance-ip)
+# Get get-ec2-instance-ip, took this from nubis-consul script
+# we do this so we don't have to depend on nubis-builder being around
+get-ec2-instance-ip () {
+    STACK_ID=$(aws cloudformation describe-stack-resources --stack-name $STACK_NAME --query 'StackResources[?LogicalResourceId == `EC2Stack`].PhysicalResourceId' --output text)
+    AS_GROUP=$(aws cloudformation describe-stack-resources --stack-name $STACK_ID --query 'StackResources[?LogicalResourceId == `AutoScalingGroup`].PhysicalResourceId' --output text)
+    INSTANCE_ID=$(aws autoscaling describe-auto-scaling-instances --query "AutoScalingInstances[?AutoScalingGroupName == \`$AS_GROUP\`].InstanceId" --output text)
+    aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'Reservations[*].Instances[*].PrivateIpAddress' --output text
+}
+
+INSTANCE_IP=$(get-ec2-instance-ip)
 if [[ -z "${INSTANCE_IP}" ]]; then
     echo "[Error]: Instance does not have an IP"
     exit 1
