@@ -37,6 +37,8 @@ Assuming you already have a nubis project directory setup you can run the follow
 ```bash
 cd $PROJECTDIR
 git submodule add git://github.com/limed/nubis-wrapper ./bin
+git commit -am "Added nubis-wrapper submodule"
+git push origin master
 ```
 
 
