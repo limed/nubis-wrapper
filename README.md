@@ -23,13 +23,13 @@ All scripts need to be ran from the base directory of your project instead of th
 * Building ami (This also assumes you have nubis-builder in your path)
   ```bash
   $ cd $PROJECTDIR
-  $ ./bin/packer-build
+  $ ./bin/build-ami.sh
   ```
 
 * Building cloudformation stack
   ```bash
   $ cd $PROJECTDIR
-  $ ./bin/build.sh <stack name>
+  $ ./bin/create.sh <stack name>
   ```
 
 ### Git submodule
@@ -38,7 +38,7 @@ The intent of this repository is to make this a submodule for nubis projects tha
 Assuming you already have a nubis project directory setup you can run the following commands in your project directory
 ```bash
 cd $PROJECTDIR
-git submodule add git://github.com/limed/nubis-wrapper ./bin
+git submodule add git://github.com/nubisproject/nubis-wrapper ./bin
 git commit -am "Added nubis-wrapper submodule"
 git push origin master
 ```
