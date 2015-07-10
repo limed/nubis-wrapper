@@ -30,4 +30,11 @@ if [[ ! -f ${PROJECT_DIR}/${PARAMETERS_PATH} ]]; then
     exit 1
 fi
 
-aws cloudformation update-stack --stack-name ${STACK_NAME} --template-body file://${TEMPLATE_PATH} --parameters file://${PARAMETERS_PATH}
+# Create stack here
+# FIXME: Has to be a more elegant way of doing this
+if [[ "$#" -gt 2 ]]; then
+    shift 1
+    aws cloudformation update-stack --stack-name "${STACK_NAME}" --template-body "file://${TEMPLATE_PATH}" --parameters "file://${PARAMETERS_PATH}" $@
+else
+    aws cloudformation update-stack --stack-name "${STACK_NAME}" --template-body "file://${TEMPLATE_PATH}" --parameters "file://${PARAMETERS_PATH}"
+fi
