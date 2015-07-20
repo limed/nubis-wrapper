@@ -52,6 +52,7 @@ message_print(){
     #fi
 }
 
+# Prints out usage
 _usage() {
     echo -en "$0\n\n"
     echo -en "Usage: $0 command StackName [Optional Parameters]\n\n"
@@ -69,13 +70,14 @@ _usage() {
     exit 0
 }
 
+# prints out usage when unable to find cloudformation template or parameter file
 _cf_file_usage() {
     if [ -z "${1}" ]; then echo "Usage: $FUNCNAME [template|parameters]"; return 1; fi
     local cf_file=$1
-    message_print CRITICAL "Unable to locate cloudformation ${cf_file} file from you current working directory (${CURRENT_DIR})"
-    message_print CRITICAL "Please make sure that you are running ${0} from the base of your project directory"
+    message_print CRITICAL "ERROR: Unable to locate cloudformation ${cf_file} file from you current working directory (${CURRENT_DIR})"
 }
 
+# Initializes nubis project
 init_nubis_project() {
     if [ -z "${1}" ]; then echo "Usage: $FUNCNAME [ProjectName]"; return 1; fi
     local project_name=$1
