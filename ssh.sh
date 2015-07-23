@@ -47,4 +47,4 @@ if [[ -z "${INSTANCE_IP}" ]]; then
 fi
 
 # ssh to actual host, we assume jumphost will be an amazon linux instance
-ssh -A -t ec2-user@jumphost.sandbox.${REGION}.nubis.allizom.org "ssh -A -t ${SSH_USERNAME}@${INSTANCE_IP}"
+ssh -A -t ec2-user@jumphost1.sandbox.${REGION}.nubis.allizom.org "ssh -A -t ${SSH_USERNAME}@${INSTANCE_IP}"
